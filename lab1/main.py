@@ -85,7 +85,7 @@ def find_best_partition(tree, target_population, max_depth):
 
 
 if __name__ == '__main__':
-    print("Cities:")
+    print("All cities:")
 
     with open("italy.txt") as file:
         next(file)  # Skip header line
@@ -102,17 +102,17 @@ if __name__ == '__main__':
     while root.children:
         collect_permutations(root)
 
-    print(f"1. Permutations for N={NUM_CITIES_TASK1}: {len(permutation_results)}")
+    print(f"\nPermutations for N={NUM_CITIES_TASK1}: {len(permutation_results)}")
     for idx, perm in enumerate(permutation_results, 1):
         print(f"{idx}. {list(map(lambda x: cities_names_list[x], perm))}")
 
     path, distance = find_shortest_cycle()
-    print(f"1d. Shortest cycle for N={NUM_CITIES_TASK1}: {distance} {list(map(lambda x: cities_names_list[x], path))}")
+    print(f"\nShortest cycle for N={NUM_CITIES_TASK1}: {distance} {list(map(lambda x: cities_names_list[x], path))}")
 
     root = TreeNode(-1, [])
     generate_permutations(root, set(range(NUM_CITIES_TASK2)), NUM_CITIES_TASK2)
     collect_combinations(root, COMBINATION_LENGTH)
-    print(f"2. Combinations for N={NUM_CITIES_TASK2}, K={COMBINATION_LENGTH}: {len(combination_results)}")
+    print(f"\nCombinations for N={NUM_CITIES_TASK2}, K={COMBINATION_LENGTH}: {len(combination_results)}")
     combinations_sorted = sorted([list(map(lambda y: cities_names_list[y], x)) for x in combination_results])
 
     for idx, combo in enumerate(combinations_sorted, 1):
@@ -120,4 +120,4 @@ if __name__ == '__main__':
 
     target_pop = sum(city.population for city in cities_list[:NUM_CITIES_TASK2]) // 2
     best_pop, best_combo = find_best_partition(root, target_pop, NUM_CITIES_TASK2)
-    print(f"2d. Best partition for N={NUM_CITIES_TASK2} (target: {target_pop}): {best_pop} {list(map(lambda x: cities_names_list[x], best_combo))}")
+    print(f"\nBest partition for N={NUM_CITIES_TASK2} (target: {target_pop}): {best_pop} {list(map(lambda x: cities_names_list[x], best_combo))}")
